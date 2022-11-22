@@ -1,0 +1,31 @@
+server:
+  port: 56040  # 启动端口 可命令行注入。
+
+spring:
+  application:
+    name: dubbo-service2
+  main:
+    allow-bean-definition-overriding: true  # Spring Boot 2.1 需要设定。
+  cloud:
+    nacos:
+      discovery:
+        #        server-addr: 192.168.142.161:8848
+        server-addr: 127.0.0.1:8848
+        namespace: 5686b1cd-7f49-4fbb-8b2c-bb2d7b6faf66
+
+dubbo:
+  scan:
+    # dubbo 服务扫描包。@org.apache.dubbo.config.annotation.Service
+    base-packages: com.geek.microservice.service2.service
+  protocol:
+    # dubbo 协议。
+    name: dubbo
+    # dubbo 协议端口。
+    port: 20891
+  registry:
+    #    address: nacos://192.168.142.161:8848
+    address: nacos://127.0.0.1:8848
+  application:
+    qos-enable: false  # dubbo 运维服务。
+  consumer:
+    check: false  # 启动时就检查依赖的服务。
